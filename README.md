@@ -149,7 +149,7 @@ In addition, you also find a duplicated car entry for VIN `DAM41UDN3CHU2WVF6`. Y
 	- Also your instructor and TA will provide support to you.
 
 1. Create a pull request with title following this format: **`[<lab_name>] <your_name>`**
-  	- For example, if the lab is *lab-mysql* and your name is *Marc Pomar*, your pull request name should be something like **`[lab-mysql] Marc Pomar`**.
+  	- For example, if the lab is *lab-mysql* and your name is *John Smith*, your pull request name should be something like **`John Smith`**.
 
 1. If you have successfully created the pull request you are done!  CONGRATS :)
 
