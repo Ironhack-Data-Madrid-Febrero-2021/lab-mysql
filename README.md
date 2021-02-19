@@ -64,6 +64,8 @@ If you use pen and paper to create the design, take a picture with your phone an
 This `.sql` file will be one of your deliverables. A `.sql` file is often used by software/data engineers to automate database operations. For example, to execute all the commands in the `create.sql` file, you can simply execute `source create.sql;` in MySQL command line. Many programming languages such as Python and PHP can also execute `.sql` files.
 
 ## Challenge 3 - Seeding the Database
+Error Code: 1046. No database selected Select the default DB to be used by double-clicking its name in the SCHEMAS list in the sidebar.
+
 
 The purpose of *database seeding* is to provide some dummy data for an empty database so that software development can be started based on the dummy data. In this challenge you will create **`seeding.sql`** which inserts dummy data rows into the tables of your new database.
 
@@ -98,7 +100,7 @@ For your convenience, we provide you some example dummy data. These dummy data m
 | 1 | 00002 | Anna Sthesia | Barcelona |
 | 2 | 00003 | Paul Molive | Berlin |
 | 3 | 00004 | Gail Forcewind | Paris |
-| 4 | 00005 | Paige Turner | Mimia |
+| 4 | 00005 | Paige Turner | Miami |
 | 5 | 00006 | Bob Frapples | Mexico City |
 | 6 | 00007 | Walter Melon | Amsterdam |
 | 7 | 00008 | Shonda Leer | São Paulo |
