@@ -34,16 +34,21 @@ invoices_idinvoices INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 invoice_number VARCHAR (40) NOT NULL DEFAULT "no_items",
 price INT NOT NULL,
 discount INT,
+cars_idcars INT,
+staff_idstaff INT,
+customers_idcustomers INT,
 FOREIGN KEY (cars_idcars) REFERENCES cars(cars_idcars),
 FOREIGN KEY (staff_idstaff) REFERENCES staff(staff_idstaff),
 FOREIGN KEY (customers_idcustomers) REFERENCES customers(customers_idcustomers)
-) ENGINE=INNODB;
+);
 
 
 CREATE TABLE IF NOT EXISTS stores(
 stores_idstores INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 store_number VARCHAR (40) NOT NULL DEFAULT "no_items",
 director VARCHAR(40),
+staff_idstaff INT,
+cars_idcars INT,
 FOREIGN KEY (staff_idstaff) REFERENCES staff(staff_idstaff),
 FOREIGN KEY (cars_idcars) REFERENCES cars (cars_idcars)
 );
