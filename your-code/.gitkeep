@@ -1,0 +1,151 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema Car_dealership_company
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Car_dealership_company
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Car_dealership_company` DEFAULT CHARACTER SET utf8 ;
+USE `Car_dealership_company` ;
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Cars`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Cars` (
+  `Car ID` INT NOT NULL,
+  `Brand` VARCHAR(45) NOT NULL,
+  `Model` VARCHAR(45) NOT NULL,
+  `Year` VARCHAR(45) NOT NULL,
+  `Colour` VARCHAR(45) NOT NULL,
+  `Departure Point` VARCHAR(45) NOT NULL,
+  `VIN` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Car ID`),
+  UNIQUE INDEX `VIN_UNIQUE` (`VIN` ASC) VISIBLE,
+  UNIQUE INDEX `Car ID_UNIQUE` (`Car ID` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Customers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Customers` (
+  `Customers ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `Phone` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NULL,
+  `Adress` VARCHAR(45) NOT NULL,
+  `City` VARCHAR(45) NOT NULL,
+  `Country` VARCHAR(45) NOT NULL,
+  `Zip code` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Customers ID`),
+  UNIQUE INDEX `idCustomers_UNIQUE` (`Customers ID` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Salespersons`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Salespersons` (
+  `Salespersons ID` INT NOT NULL,
+  `Staff ID` VARCHAR(45) NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Office` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Salespersons ID`, `Staff ID`),
+  UNIQUE INDEX `idSalespersons_UNIQUE` (`Salespersons ID` ASC) VISIBLE,
+  UNIQUE INDEX `Staff ID_UNIQUE` (`Staff ID` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Invoices`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Invoices` (
+  `Invoice Number ID` INT NOT NULL AUTO_INCREMENT,
+  `Customer ID` VARCHAR(45) NOT NULL,
+  `Salesperson ID` VARCHAR(45) NOT NULL,
+  `VIN ID` VARCHAR(45) NOT NULL,
+  `Date of sale` VARCHAR(45) NOT NULL,
+  `Price` FLOAT NOT NULL,
+  `Cars_Car ID` INT NOT NULL,
+  `Customers_Customers ID` INT NOT NULL,
+  `Salespersons_Salespersons ID` INT NOT NULL,
+  `Salespersons_Staff ID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Invoice Number ID`, `Cars_Car ID`, `Customers_Customers ID`, `Salespersons_Salespersons ID`, `Salespersons_Staff ID`),
+  UNIQUE INDEX `idInvoices_UNIQUE` (`Invoice Number ID` ASC) VISIBLE,
+  UNIQUE INDEX `Customer_UNIQUE` (`Customer ID` ASC) VISIBLE,
+  INDEX `fk_Invoices_Cars1_idx` (`Cars_Car ID` ASC) VISIBLE,
+  INDEX `fk_Invoices_Customers1_idx` (`Customers_Customers ID` ASC) VISIBLE,
+  INDEX `fk_Invoices_Salespersons1_idx` (`Salespersons_Salespersons ID` ASC, `Salespersons_Staff ID` ASC) VISIBLE,
+  CONSTRAINT `fk_Invoices_Cars1`
+    FOREIGN KEY (`Cars_Car ID`)
+    REFERENCES `Car_dealership_company`.`Cars` (`Car ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Invoices_Customers1`
+    FOREIGN KEY (`Customers_Customers ID`)
+    REFERENCES `Car_dealership_company`.`Customers` (`Customers ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Invoices_Salespersons1`
+    FOREIGN KEY (`Salespersons_Salespersons ID` , `Salespersons_Staff ID`)
+    REFERENCES `Car_dealership_company`.`Salespersons` (`Salespersons ID` , `Staff ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Branches`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Branches` (
+  `Offices` INT NOT NULL,
+  `Office Sao Paulo` VARCHAR(45) NOT NULL,
+  `Office Berlin` VARCHAR(45) NOT NULL,
+  `Office New York` VARCHAR(45) NOT NULL,
+  `Invoices_Invoice Number ID` INT NOT NULL,
+  `Invoices_Cars_Car ID` INT NOT NULL,
+  `Invoices_Customers_Customers ID` INT NOT NULL,
+  `Invoices_Salespersons_Salespersons ID` INT NOT NULL,
+  `Invoices_Salespersons_Staff ID` VARCHAR(45) NOT NULL,
+  UNIQUE INDEX `Offices_UNIQUE` (`Offices` ASC) VISIBLE,
+  UNIQUE INDEX `Office Sao Paulo_UNIQUE` (`Office Sao Paulo` ASC) VISIBLE,
+  UNIQUE INDEX `Office Berlin_UNIQUE` (`Office Berlin` ASC) VISIBLE,
+  UNIQUE INDEX `Office New York_UNIQUE` (`Office New York` ASC) VISIBLE,
+  PRIMARY KEY (`Offices`, `Invoices_Invoice Number ID`, `Invoices_Cars_Car ID`, `Invoices_Customers_Customers ID`, `Invoices_Salespersons_Salespersons ID`, `Invoices_Salespersons_Staff ID`),
+  INDEX `fk_Branches_Invoices1_idx` (`Invoices_Invoice Number ID` ASC, `Invoices_Cars_Car ID` ASC, `Invoices_Customers_Customers ID` ASC, `Invoices_Salespersons_Salespersons ID` ASC, `Invoices_Salespersons_Staff ID` ASC) VISIBLE,
+  CONSTRAINT `fk_Branches_Invoices1`
+    FOREIGN KEY (`Invoices_Invoice Number ID` , `Invoices_Cars_Car ID` , `Invoices_Customers_Customers ID` , `Invoices_Salespersons_Salespersons ID` , `Invoices_Salespersons_Staff ID`)
+    REFERENCES `Car_dealership_company`.`Invoices` (`Invoice Number ID` , `Cars_Car ID` , `Customers_Customers ID` , `Salespersons_Salespersons ID` , `Salespersons_Staff ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Car_dealership_company`.`Main Office Madrid`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Car_dealership_company`.`Main Office Madrid` (
+  `Branches_Offices` INT NOT NULL AUTO_INCREMENT,
+  `Branches_Invoices_Invoice Number ID` INT NOT NULL,
+  `Branches_Invoices_Cars_Car ID` INT NOT NULL,
+  `Branches_Invoices_Customers_Customers ID` INT NOT NULL,
+  `Branches_Invoices_Salespersons_Salespersons ID` INT NOT NULL,
+  `Branches_Invoices_Salespersons_Staff ID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Branches_Offices`, `Branches_Invoices_Invoice Number ID`, `Branches_Invoices_Cars_Car ID`, `Branches_Invoices_Customers_Customers ID`, `Branches_Invoices_Salespersons_Salespersons ID`, `Branches_Invoices_Salespersons_Staff ID`),
+  CONSTRAINT `fk_Main Office Madrid_Branches1`
+    FOREIGN KEY (`Branches_Offices` , `Branches_Invoices_Invoice Number ID` , `Branches_Invoices_Cars_Car ID` , `Branches_Invoices_Customers_Customers ID` , `Branches_Invoices_Salespersons_Salespersons ID` , `Branches_Invoices_Salespersons_Staff ID`)
+    REFERENCES `Car_dealership_company`.`Branches` (`Offices` , `Invoices_Invoice Number ID` , `Invoices_Cars_Car ID` , `Invoices_Customers_Customers ID` , `Invoices_Salespersons_Salespersons ID` , `Invoices_Salespersons_Staff ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
