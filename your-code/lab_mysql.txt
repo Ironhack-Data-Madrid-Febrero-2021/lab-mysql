@@ -1,0 +1,60 @@
+CHALLENGE 2
+
+
+USE lab_mysql;
+CREATE TABLE Cars (VIN INT, Manufacturer VARCHAR(20), Model VARCHAR(20), 
+Year DATETIME(6), Color_Cars VARCHAR(45), SalesPersons_Staff_ID INT, Customer_ID INT);
+	SELECT * FROM Cars;
+    
+CREATE TABLE SalesPersons (Staff_ID INT, Name VARCHAR(20), Store_Company VARCHAR(45));
+	SELECT * FROM SalesPersons;
+    
+    
+CREATE TABLE Invoices (Invoices_number INT, Date DATETIME(6), Car VARCHAR(20), 
+	Customer VARCHAR(45), SalesPerson_Each_Car VARCHAR(45), SalesPersons_Staff_ID INT);
+    SELECT * FROM Invoices;
+
+CREATE TABLE Customers (Customer_ID INT, Name VARCHAR(45), Phone_Number INT, 
+	Email VARCHAR(45), Address VARCHAR(45), City VARCHAR(45), State_Province VARCHAR(45),
+    Country VARCHAR(45), Zip_Postal VARCHAR(45));
+    SELECT * FROM Customers;
+
+
+
+
+
+
+
+
+
+CHALLENGE 3
+
+
+INSERT INTO `Cars` (`VIN`, `Manufacturer`, `Model`, `Year`, `Color_Cars`) VALUES 
+( "3K096I98581DHSNUP", "Volkswagen", "Tiguan", '2019', "Blue" ),
+( "ZM8G7BEUQZ97IH46V", "Peugeot", "Rifter", '2019', "Red" ),
+( "RKXVNNIHLVVZOUB4M", "Ford", "Fusion", '2018', "White" ),
+( "HKNDGS7CU31E9Z7JW", "Toyota", "RAV4", '2018', "Silver" ),
+( "DAM41UDN3CHU2WVF6", "Volvo", "V60", '2019', "Grey" ),
+( "DAM41UDN3CHU2WVF6", "Volvo", "V60 Cross Country", '2019', "Grey" );
+
+INSERT INTO `Customer` (`Customer_ID`, `Name`, `Phone_Number`, `Email`, `Address`, `City`, `State_Province`, `Country`, `Zip_Postal`) VALUES 
+('1001', "Pablo Picasso", '+34 636 17 63 82', NULL, "Paseo de la Chopera 14", "Madrid", "Madrid", "Spain", '28045'),
+('2001', "Abraham Lincoln", '+1 305 907 7086', NULL, "120 SW 8th St", "Miami", "Florida", 'United States', '33130'),
+('3001', "Napoléon Bonaparte", '+33 1 79 75 40 00', NULL, "40 Rue du Colisée", "Paris", "Île-de-France", "France", '75008');
+   
+INSERT INTO `salespersons` (`Staff_ID`, `Name`, `Store`) VALUES
+('0001', "Petey Cruiser", "Madrid"),
+('0002', "Anna Sthesia", "Barcelona"),
+('0003', "Paul Molive", "Berlin"),
+('1004¡', "Gail Forcewind", "Paris"),
+('1005', "Paige Turner", "Mimia"),
+('0006', "Bob Frapples", "Mexico City"),
+('0007', "Walter Melon", "Amsterdam"),
+('0008', "Shonda Leer", "São Paulo");
+
+
+INSERT INTO `invoices` (`Invoices_number`, `Date`, `Car`, `Customer`, `SalesPerson_Each_Car`) VALUES
+('852399038', '22-08-2018', '0', '1', '3'),
+('731166526', '31-12-2018', '3', '0', '5'),
+('271135104', '222-01-2019', '2', '2', '7');
