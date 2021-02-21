@@ -1,0 +1,17 @@
+---------------
+UPDATE Miami (sales_person=
+----------------------------
+
+
+
+UPDATE `mydb`.`sales_persons` SET `Store` = 'Miami' WHERE (`idSales_persons` = '5');
+
+---------------
+UPDATE email
+----------------------------
+
+
+
+UPDATE `mydb`.`customers` SET `email` = 'ppicasso@gmail.com' WHERE (`idCustomers` = '1');
+UPDATE `mydb`.`customers` SET `email` = 'lincoln@us.gov' WHERE (`idCustomers` = '2');
+UPDATE `mydb`.`customers` SET `email` = 'hello@napoleon.me' WHERE (`idCustomers` = '3');

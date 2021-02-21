@@ -1,0 +1,12 @@
+'''EJEMPLO DE INSERT INTRO'
+
+No tengo todos guardados
+---------------------------------
+
+
+
+INSERT INTO `mydb`.`invoices` (`idInvoices`, `Invoice_number`, `Date`, `Car`, `Customer`, `sales_person`) VALUES ('0', '852399038', '22-08-2018', '0', '1', '3');
+INSERT INTO `mydb`.`invoices` (`idInvoices`, `Invoice_number`, `Date`, `Car`, `Customer`, `sales_person`) VALUES ('1', '731166526', '31-12-2018', '3', '0', '5');
+INSERT INTO `mydb`.`invoices` (`idInvoices`, `Invoice_number`, `Date`, `Car`, `Customer`, `sales_person`) VALUES ('2', '271135104', '22-01-2019', '2', '2', '7');
+
+

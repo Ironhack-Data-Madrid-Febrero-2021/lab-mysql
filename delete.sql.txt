@@ -1,0 +1,6 @@
+----------
+Delete duplicated car
+------------------
+
+
+DELETE FROM `mydb`.`cars` WHERE (`id` = '6');
